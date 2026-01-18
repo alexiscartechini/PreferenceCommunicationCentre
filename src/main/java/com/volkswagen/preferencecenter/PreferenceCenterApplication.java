@@ -9,5 +9,4 @@ public class PreferenceCenterApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PreferenceCenterApplication.class, args);
 	}
-
 }
