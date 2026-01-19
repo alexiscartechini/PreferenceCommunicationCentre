@@ -21,7 +21,7 @@ public class User {
 
     public User(String email) {
         if(!isValidEmail(email)){
-            throw new InvalidEmailException(email);
+            throw new InvalidEmailException(email + " is not a valid email.");
         }
         this.email = email;
     }
