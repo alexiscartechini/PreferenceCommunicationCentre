@@ -12,11 +12,15 @@ public class ConsentEvent {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private final String userId;
+    private String userId;
     @Enumerated(EnumType.STRING)
-    private final ConsentType consentType;
-    private final boolean isEnabled;
-    private final Instant occurredAt;
+    private ConsentType consentType;
+    private boolean isEnabled;
+    private Instant occurredAt;
+
+    public ConsentEvent() {
+        //needed for JPA
+    }
 
     public ConsentEvent(Consent consent, Instant occurredAt) {
         this.userId = consent.userId();
