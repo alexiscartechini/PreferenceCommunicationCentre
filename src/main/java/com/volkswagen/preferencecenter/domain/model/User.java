@@ -6,13 +6,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
 
+@Getter
 @Entity
 public class User {
 
     @Id
     private String id;
     @Column(unique = true)
-    @Getter
     private String email;
 
     public User() {
