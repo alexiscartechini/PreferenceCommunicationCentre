@@ -1,20 +1,20 @@
 package com.volkswagen.preferencecenter.domain.model;
 
+import com.volkswagen.preferencecenter.domain.exception.InvalidEmailException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
 
-    private User user;
+    private static final String VALID_EMAIL = "valid_email@email.com";
 
     @Test
     void shouldReturnTrueIfEmailIsValid(){
-        user = new User("valid_email@email.com");
-        assertTrue(user.isValidEmail());
+        User user = new User(VALID_EMAIL);
+        assertEquals(VALID_EMAIL, user.getEmail());
     }
 
     @ParameterizedTest
@@ -24,7 +24,6 @@ class UserTest {
             "invalid_email.com@email"
     })
     void shouldReturnFalseIfEmailIsInvalid(String invalidEmail){
-        user = new User(invalidEmail);
-        assertFalse(user.isValidEmail());
+        assertThrows(InvalidEmailException.class, ()-> new User(invalidEmail));
     }
 }

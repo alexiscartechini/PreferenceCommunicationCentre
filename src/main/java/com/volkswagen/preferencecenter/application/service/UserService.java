@@ -1,5 +1,6 @@
 package com.volkswagen.preferencecenter.application.service;
 
+import com.volkswagen.preferencecenter.application.exception.EmailAlreadyExistsException;
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.ConsentEvent;
 import com.volkswagen.preferencecenter.domain.model.User;
@@ -29,6 +30,10 @@ public class UserService {
     }
 
     public void createUser(String email) {
-        userPersistencePort.save(new User(email));
+        if (isUniqueEmail(email)){
+            userPersistencePort.save(new User(email));
+        } else {
+            throw new EmailAlreadyExistsException(email);
+        }
     }
 }
