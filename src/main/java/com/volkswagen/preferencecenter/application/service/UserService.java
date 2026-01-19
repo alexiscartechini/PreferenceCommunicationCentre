@@ -2,6 +2,7 @@ package com.volkswagen.preferencecenter.application.service;
 
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.ConsentEvent;
+import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.domain.port.ConsentPersistencePort;
 import com.volkswagen.preferencecenter.domain.port.UserPersistencePort;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,9 @@ public class UserService {
 
     public void chooseNotification(Consent consent) {
         consentPersistencePort.save(new ConsentEvent(consent, Instant.now()));
+    }
+
+    public void createUser(String email) {
+        userPersistencePort.save(new User(email));
     }
 }
