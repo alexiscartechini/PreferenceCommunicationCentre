@@ -16,19 +16,20 @@ import static org.mockito.Mockito.*;
 class UserServiceTest {
 
     private static final String NOT_UNIQUE_EMAIL = "not_unique_email@email.com";
+    private static final String UNIQUE_EMAIL = "unique_email@email.com";
     private final UserPersistencePort userPersistencePort = mock(UserPersistencePort.class);
     private final ConsentPersistencePort consentPersistencePort = mock(ConsentPersistencePort.class);
     private final UserService userService = new UserService(userPersistencePort, consentPersistencePort);
 
     @Test
     void shouldReturnTrueIfEmailIsUnique(){
-        when(userPersistencePort.findByEmail("unique_email@email.com")).thenReturn(Optional.empty());
-        assertTrue(userService.isUniqueEmail("unique_email@email.com"));
+        when(userPersistencePort.findByEmail(UNIQUE_EMAIL)).thenReturn(Optional.empty());
+        assertTrue(userService.isUniqueEmail(UNIQUE_EMAIL));
     }
 
     @Test
     void shouldReturnFalseIfEmailIsNotUnique(){
-        when(userPersistencePort.findByEmail(NOT_UNIQUE_EMAIL)).thenReturn(Optional.of(new User()));
+        when(userPersistencePort.findByEmail(NOT_UNIQUE_EMAIL)).thenReturn(Optional.of(new User(NOT_UNIQUE_EMAIL)));
         assertFalse(userService.isUniqueEmail(NOT_UNIQUE_EMAIL));
     }
 

@@ -7,25 +7,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UserTest {
 
-    private final User user = new User();
+    private User user;
 
     @Test
     void shouldReturnTrueIfEmailIsValid(){
-        assertTrue(user.isValidEmail("valid_email@email.com"));
+        user = new User("valid_email@email.com");
+        assertTrue(user.isValidEmail());
     }
 
     @Test
     void shouldReturnFalseWhenEmailDoesNotContainsAtCharacter(){
-        assertFalse(user.isValidEmail("invalid_email.com"));
+        user = new User("invalid_email.com");
+        assertFalse(user.isValidEmail());
     }
 
     @Test
     void shouldReturnFalseWhenEmailDoesNotContainsDotCharacter(){
-        assertFalse(user.isValidEmail("invalid_email@emailcom"));
+        user = new User("invalid_email@emailcom");
+        assertFalse(user.isValidEmail());
     }
 
     @Test
     void shouldReturnFalseWhenDotAndAtCharacterAreNotInCorrectOrderOnEmail(){
-        assertFalse(user.isValidEmail("invalid_email.com@email"));
+        user = new User("invalid_email.com@email");
+        assertFalse(user.isValidEmail());
     }
 }

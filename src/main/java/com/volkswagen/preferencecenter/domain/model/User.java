@@ -12,7 +12,15 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    public boolean isValidEmail(String email) {
+    public User() {
+        //needed for JPA
+    }
+
+    public User(String email) {
+        this.email = email;
+    }
+
+    public boolean isValidEmail() {
         return email.matches(".+@.+\\..+");
     }
 }
