@@ -25,4 +25,9 @@ public class UserRepositoryAdapter implements UserPersistencePort {
     public void save(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public Optional<User> findUserById(String id) {
+        return userRepository.findById(id);
+    }
 }
