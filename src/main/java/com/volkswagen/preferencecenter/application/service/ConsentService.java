@@ -31,7 +31,7 @@ public class ConsentService {
                         new ConsentEvent(
                                 user.getId(),
                                 ConsentType.from(consentRequest.id()),
-                                consentRequest.isEnabled(),
+                                consentRequest.enabled(),
                                 Instant.now()
                         )
                 ));

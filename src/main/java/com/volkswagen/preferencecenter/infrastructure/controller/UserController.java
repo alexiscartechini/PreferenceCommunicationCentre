@@ -2,6 +2,7 @@ package com.volkswagen.preferencecenter.infrastructure.controller;
 
 import com.volkswagen.preferencecenter.application.service.UserService;
 import com.volkswagen.preferencecenter.domain.model.User;
+import com.volkswagen.preferencecenter.dto.CreateUserRequest;
 import com.volkswagen.preferencecenter.dto.UserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody String email){
-        User user = userService.createUser(email);
+    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest userRequest){
+        User user = userService.createUser(userRequest.email());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(UserResponse.from(user));
     }
