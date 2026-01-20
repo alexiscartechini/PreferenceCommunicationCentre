@@ -18,11 +18,10 @@ public class UserService {
         return userPersistencePort.findByEmail(email).isEmpty();
     }
 
-    public void createUser(String email) {
-        if (isUniqueEmail(email)){
-            userPersistencePort.save(new User(email));
-        } else {
-            throw new EmailAlreadyExistsException(email + " already exists.");
-        }
+    public User createUser(String email) {
+        if (!isUniqueEmail(email)) throw new EmailAlreadyExistsException(email + " already exists.");
+        User user = new User(email);
+        userPersistencePort.save(user);
+        return user;
     }
 }
