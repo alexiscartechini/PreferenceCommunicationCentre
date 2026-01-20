@@ -3,7 +3,7 @@ package com.volkswagen.preferencecenter.dto;
 import java.util.List;
 
 public record UpdateConsentsRequest(
-        UserReference userReference,
+        UserReference user,
         List<ConsentRequest> consents
 ) {
 }

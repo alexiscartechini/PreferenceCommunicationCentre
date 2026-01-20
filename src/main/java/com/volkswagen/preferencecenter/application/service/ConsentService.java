@@ -23,7 +23,7 @@ public class ConsentService {
     }
 
     public void chooseConsent(UpdateConsentsRequest updateConsentsRequest) {
-        User user = userPersistencePort.findUserById(updateConsentsRequest.userReference().id())
+        User user = userPersistencePort.findUserById(updateConsentsRequest.user().id())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         updateConsentsRequest.consents().forEach(consentRequest ->
