@@ -6,12 +6,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 @Entity
 public class User {
 
     @Id
-    private String id;
+    @Column(columnDefinition = "uuid")
+    private UUID id;
     @Column(unique = true)
     private String email;
 

@@ -6,6 +6,7 @@ import com.volkswagen.preferencecenter.infrastructure.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class UserRepositoryAdapter implements UserPersistencePort {
@@ -27,7 +28,7 @@ public class UserRepositoryAdapter implements UserPersistencePort {
     }
 
     @Override
-    public Optional<User> findUserById(String id) {
+    public Optional<User> findUserById(UUID id) {
         return userRepository.findById(id);
     }
 }

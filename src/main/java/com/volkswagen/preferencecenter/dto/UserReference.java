@@ -1,3 +1,3 @@
 package com.volkswagen.preferencecenter.dto;
 
-public record UserReference(String id){}
+public record UserReference(java.util.UUID id){}
