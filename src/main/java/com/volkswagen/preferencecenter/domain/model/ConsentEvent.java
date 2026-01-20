@@ -22,10 +22,10 @@ public class ConsentEvent {
         //needed for JPA
     }
 
-    public ConsentEvent(Consent consent, Instant occurredAt) {
-        this.userId = consent.userId();
-        this.consentType = consent.consentType();
-        this.isEnabled = consent.isEnabled();
+    public ConsentEvent(String userId, ConsentType consentType, boolean isEnabled, Instant occurredAt) {
+        this.userId = userId;
+        this.consentType = consentType;
+        this.isEnabled = isEnabled;
         this.occurredAt = occurredAt;
     }
 }
