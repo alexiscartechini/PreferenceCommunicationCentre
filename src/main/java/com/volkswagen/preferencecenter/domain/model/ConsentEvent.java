@@ -8,6 +8,7 @@ import java.util.UUID;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "consent_events")
 public class ConsentEvent {
 
     @Id

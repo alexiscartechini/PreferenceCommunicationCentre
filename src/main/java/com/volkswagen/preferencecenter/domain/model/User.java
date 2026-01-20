@@ -1,19 +1,19 @@
 package com.volkswagen.preferencecenter.domain.model;
 
 import com.volkswagen.preferencecenter.domain.exception.InvalidEmailException;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.UUID;
 
 @Getter
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
-    @Column(columnDefinition = "uuid")
+    @GeneratedValue
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
     @Column(unique = true)
     private String email;
