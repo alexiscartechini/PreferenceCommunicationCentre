@@ -1,4 +1,4 @@
-package com.volkswagen.preferencecenter.infrastructure.repository;
+package com.volkswagen.preferencecenter.infrastructure.persistance.repository;
 
 import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 import org.springframework.data.jpa.repository.JpaRepository;

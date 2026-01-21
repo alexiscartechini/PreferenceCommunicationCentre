@@ -1,8 +1,8 @@
-package com.volkswagen.preferencecenter.infrastructure.adapter;
+package com.volkswagen.preferencecenter.infrastructure.persistance.adapter;
 
 import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.domain.port.UserPersistencePort;
-import com.volkswagen.preferencecenter.infrastructure.repository.UserRepository;
+import com.volkswagen.preferencecenter.infrastructure.persistance.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

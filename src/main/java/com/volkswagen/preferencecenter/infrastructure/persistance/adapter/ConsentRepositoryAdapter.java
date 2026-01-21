@@ -1,8 +1,8 @@
-package com.volkswagen.preferencecenter.infrastructure.adapter;
+package com.volkswagen.preferencecenter.infrastructure.persistance.adapter;
 
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.port.ConsentPersistencePort;
-import com.volkswagen.preferencecenter.infrastructure.repository.ConsentRepository;
+import com.volkswagen.preferencecenter.infrastructure.persistance.repository.ConsentRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
