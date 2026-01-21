@@ -1,8 +1,8 @@
 package com.volkswagen.preferencecenter.domain.port;
 
-import com.volkswagen.preferencecenter.domain.model.ConsentEvent;
+import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 
 public interface ConsentChangeEventPersistencePort {
 
-    void save(ConsentEvent consentEvent);
+    void save(ConsentChangeEvent consentChangeEvent);
 }

@@ -8,8 +8,8 @@ import java.util.UUID;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "consent_events")
-public class ConsentEvent {
+@Table(name = "consent_change_events")
+public class ConsentChangeEvent {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -20,11 +20,11 @@ public class ConsentEvent {
     private boolean isEnabled;
     private Instant occurredAt;
 
-    public ConsentEvent() {
+    public ConsentChangeEvent() {
         //needed for JPA
     }
 
-    public ConsentEvent(UUID userId, ConsentType consentType, boolean isEnabled, Instant occurredAt) {
+    public ConsentChangeEvent(UUID userId, ConsentType consentType, boolean isEnabled, Instant occurredAt) {
         this.userId = userId;
         this.consentType = consentType;
         this.isEnabled = isEnabled;

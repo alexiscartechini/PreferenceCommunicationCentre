@@ -1,21 +1,21 @@
 package com.volkswagen.preferencecenter.infrastructure.adapter;
 
-import com.volkswagen.preferencecenter.domain.model.ConsentEvent;
+import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 import com.volkswagen.preferencecenter.domain.port.ConsentChangeEventPersistencePort;
-import com.volkswagen.preferencecenter.infrastructure.repository.ConsentEventRepository;
+import com.volkswagen.preferencecenter.infrastructure.repository.ConsentChangeEventRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ConsentChangeEventEventRepositoryAdapter implements ConsentChangeEventPersistencePort {
 
-    private final ConsentEventRepository consentEventRepository;
+    private final ConsentChangeEventRepository consentChangeEventRepository;
 
-    public ConsentChangeEventEventRepositoryAdapter(ConsentEventRepository consentEventRepository) {
-        this.consentEventRepository = consentEventRepository;
+    public ConsentChangeEventEventRepositoryAdapter(ConsentChangeEventRepository consentChangeEventRepository) {
+        this.consentChangeEventRepository = consentChangeEventRepository;
     }
 
     @Override
-    public void save(ConsentEvent consentEvent) {
-        consentEventRepository.save(consentEvent);
+    public void save(ConsentChangeEvent consentChangeEvent) {
+        consentChangeEventRepository.save(consentChangeEvent);
     }
 }
