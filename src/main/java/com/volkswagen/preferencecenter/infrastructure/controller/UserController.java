@@ -6,10 +6,9 @@ import com.volkswagen.preferencecenter.dto.CreateUserRequest;
 import com.volkswagen.preferencecenter.dto.UserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,5 +25,11 @@ public class UserController {
         User user = userService.createUser(userRequest.email());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(UserResponse.from(user));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUser(@PathVariable UUID id){
+        User user = userService.getUserWithCurrentConsents(id);
+        return ResponseEntity.ok(UserResponse.from(user));
     }
 }
