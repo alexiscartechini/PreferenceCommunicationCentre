@@ -19,6 +19,6 @@ public class ConsentController {
 
     @PostMapping
     public void changeConsent(@RequestBody UpdateConsentsRequest updateConsentsRequest){
-        consentService.chooseConsent(updateConsentsRequest);
+        consentService.changeConsent(updateConsentsRequest);
     }
 }
