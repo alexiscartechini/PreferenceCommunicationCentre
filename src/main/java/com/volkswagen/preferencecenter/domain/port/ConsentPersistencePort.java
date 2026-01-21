@@ -1,8 +1,8 @@
 package com.volkswagen.preferencecenter.domain.port;
 
-import com.volkswagen.preferencecenter.domain.model.ConsentEvent;
+import java.util.UUID;
 
 public interface ConsentPersistencePort {
 
-    void save(ConsentEvent consentEvent);
+    void getConsentsByUserId(UUID id);
 }
