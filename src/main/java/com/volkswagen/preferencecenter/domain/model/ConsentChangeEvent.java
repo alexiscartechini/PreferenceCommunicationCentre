@@ -1,12 +1,14 @@
 package com.volkswagen.preferencecenter.domain.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.Instant;
 import java.util.UUID;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+@Getter
 @Entity
 @Table(name = "consent_change_events")
 public class ConsentChangeEvent {
