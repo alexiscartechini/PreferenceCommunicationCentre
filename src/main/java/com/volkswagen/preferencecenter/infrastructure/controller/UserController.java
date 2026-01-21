@@ -29,7 +29,6 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable UUID id){
-        User user = userService.getUserWithCurrentConsents(id);
-        return ResponseEntity.ok(UserResponse.from(user));
+        return ResponseEntity.ok(userService.getUserWithCurrentConsents(id));
     }
 }

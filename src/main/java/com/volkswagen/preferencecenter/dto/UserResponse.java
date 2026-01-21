@@ -1,5 +1,6 @@
 package com.volkswagen.preferencecenter.dto;
 
+import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.User;
 
 import java.util.List;
@@ -11,6 +12,14 @@ public record UserResponse(UUID id, String email, List<ConsentStatusResponse> co
                 user.getId(),
                 user.getEmail(),
                 List.of()
+        );
+    }
+
+    public static UserResponse from(User user, List<Consent> consents) {
+        return new UserResponse(
+                user.getId(),
+                user.getEmail(),
+                ConsentStatusResponse.from(consents)
         );
     }
 }
