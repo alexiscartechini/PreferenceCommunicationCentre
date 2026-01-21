@@ -6,11 +6,11 @@ import com.volkswagen.preferencecenter.infrastructure.persistance.repository.Con
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConsentChangeEventEventRepositoryAdapter implements ConsentChangeEventPersistencePort {
+public class ConsentChangeEventRepositoryAdapter implements ConsentChangeEventPersistencePort {
 
     private final ConsentChangeEventRepository consentChangeEventRepository;
 
-    public ConsentChangeEventEventRepositoryAdapter(ConsentChangeEventRepository consentChangeEventRepository) {
+    public ConsentChangeEventRepositoryAdapter(ConsentChangeEventRepository consentChangeEventRepository) {
         this.consentChangeEventRepository = consentChangeEventRepository;
     }
 
