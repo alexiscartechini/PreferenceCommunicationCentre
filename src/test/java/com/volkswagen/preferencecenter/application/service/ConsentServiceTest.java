@@ -29,7 +29,7 @@ class ConsentServiceTest {
     private final ConsentService consentService = new ConsentService(userRepositoryPort, consentRepositoryPort, consentChangedEventHandler);
 
     @Test
-    void shouldUpdateConsentForAGivenUser() {
+    void shouldUpdateConsentsAndPublishEventsWhenUserExists() {
         UUID userId = UUID.randomUUID();
         User user = new User("valid_email@email.com");
         List<ConsentRequest> consentRequests = List.of(
