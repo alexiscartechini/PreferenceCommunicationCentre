@@ -29,7 +29,7 @@ public class ConsentService {
         this.consentChangedEventHandler = consentChangedEventHandler;
     }
 
-    private static ConsentChangeEvent getConsentChangeEvent(ConsentRequest consentRequest, User user) {
+    private ConsentChangeEvent getConsentChangeEvent(ConsentRequest consentRequest, User user) {
         return new ConsentChangeEvent(
                 user.getId(),
                 ConsentType.from(consentRequest.id()),

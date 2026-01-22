@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/consents")
 public class ConsentController {
 
-    ConsentService consentService;
+    private final ConsentService consentService;
 
     public ConsentController(ConsentService consentService) {
         this.consentService = consentService;
