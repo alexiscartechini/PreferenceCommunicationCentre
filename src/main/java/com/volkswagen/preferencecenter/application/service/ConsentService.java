@@ -13,6 +13,7 @@ import com.volkswagen.preferencecenter.domain.port.UserPersistencePort;
 import com.volkswagen.preferencecenter.dto.ConsentRequest;
 import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
@@ -43,6 +44,7 @@ public class ConsentService {
         );
     }
 
+    @Transactional
     public void changeConsent(UpdateConsentsRequest updateConsentsRequest) {
         User user = userPersistencePort.findUserById(updateConsentsRequest.user().id())
                 .orElseThrow(() -> new UserNotFoundException("User not found."));
