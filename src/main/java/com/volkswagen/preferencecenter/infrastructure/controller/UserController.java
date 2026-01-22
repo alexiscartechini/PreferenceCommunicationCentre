@@ -3,6 +3,7 @@ package com.volkswagen.preferencecenter.infrastructure.controller;
 import com.volkswagen.preferencecenter.application.service.UserService;
 import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.dto.CreateUserRequest;
+import com.volkswagen.preferencecenter.dto.UpdateUserEmailRequest;
 import com.volkswagen.preferencecenter.dto.UserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +37,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable UUID id) {
         userService.deleteUser(id);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateEmail(@PathVariable UUID id, @RequestBody UpdateUserEmailRequest updateUserEmailRequest){
+        userService.updateEmail(id, updateUserEmailRequest.email());
     }
 }

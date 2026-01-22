@@ -8,6 +8,7 @@ import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
 import com.volkswagen.preferencecenter.dto.UserResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,5 +43,13 @@ public class UserService {
 
     public void deleteUser(UUID id) {
         userRepositoryPort.deleteById(id);
+    }
+
+    @Transactional
+    public void updateEmail(UUID id, String email) {
+        User user = userRepositoryPort.findUserById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
+
+        user.changeEmail(email);
     }
 }

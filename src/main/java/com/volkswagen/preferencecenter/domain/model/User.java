@@ -29,6 +29,13 @@ public class User {
         this.email = email;
     }
 
+    public void changeEmail(String newEmail) {
+        if (!isValidEmail(newEmail)) {
+            throw new InvalidEmailException(newEmail + " is not a valid email.");
+        }
+        this.email = newEmail;
+    }
+
     private boolean isValidEmail(String email) {
         return email.matches(".+@.+\\..+");
     }
