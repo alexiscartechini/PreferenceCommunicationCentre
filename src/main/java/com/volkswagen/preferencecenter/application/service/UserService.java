@@ -39,4 +39,8 @@ public class UserService {
         List<Consent> consents = consentRepositoryPort.getConsentsByUserId(id);
         return UserResponse.from(user, consents);
     }
+
+    public void deleteUser(UUID id) {
+        userRepositoryPort.deleteById(id);
+    }
 }

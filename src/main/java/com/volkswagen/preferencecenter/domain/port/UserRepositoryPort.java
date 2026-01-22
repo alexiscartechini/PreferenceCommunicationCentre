@@ -12,4 +12,6 @@ public interface UserRepositoryPort {
     void save(User user);
 
     Optional<User> findUserById(UUID id);
+
+    void deleteById(UUID id);
 }

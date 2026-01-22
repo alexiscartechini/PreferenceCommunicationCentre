@@ -31,4 +31,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public Optional<User> findUserById(UUID id) {
         return userRepository.findById(id);
     }
+
+    @Override
+    public void deleteById(UUID id) {
+        userRepository.deleteById(id);
+    }
 }
