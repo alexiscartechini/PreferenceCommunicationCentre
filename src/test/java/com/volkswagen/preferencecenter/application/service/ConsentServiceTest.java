@@ -6,10 +6,10 @@ import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 import com.volkswagen.preferencecenter.domain.model.ConsentType;
 import com.volkswagen.preferencecenter.domain.model.User;
-import com.volkswagen.preferencecenter.domain.port.ConsentChangeEventPersistencePort;
-import com.volkswagen.preferencecenter.domain.port.ConsentPersistencePort;
+import com.volkswagen.preferencecenter.domain.port.ConsentChangeEventRepositoryPort;
+import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.DomainEventPublisher;
-import com.volkswagen.preferencecenter.domain.port.UserPersistencePort;
+import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
 import com.volkswagen.preferencecenter.dto.ConsentRequest;
 import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
 import com.volkswagen.preferencecenter.dto.UserReference;
@@ -24,12 +24,12 @@ import static org.mockito.Mockito.*;
 
 class ConsentServiceTest {
 
-    private final UserPersistencePort userPersistencePort = mock(UserPersistencePort.class);
-    private final ConsentChangeEventPersistencePort consentChangeEventPersistencePort = mock(ConsentChangeEventPersistencePort.class);
-    private final ConsentPersistencePort consentPersistencePort = mock(ConsentPersistencePort.class);
+    private final UserRepositoryPort userRepositoryPort = mock(UserRepositoryPort.class);
+    private final ConsentChangeEventRepositoryPort consentChangeEventRepositoryPort = mock(ConsentChangeEventRepositoryPort.class);
+    private final ConsentRepositoryPort consentRepositoryPort = mock(ConsentRepositoryPort.class);
     private final DomainEventPublisher domainEventPublisher = mock(DomainEventPublisher.class);
 
-    private final ConsentService consentService = new ConsentService(userPersistencePort, consentChangeEventPersistencePort, consentPersistencePort, domainEventPublisher);
+    private final ConsentService consentService = new ConsentService(userRepositoryPort, consentChangeEventRepositoryPort, consentRepositoryPort, domainEventPublisher);
 
     @Test
     void shouldUpdateConsentForAGivenUser() {
@@ -40,11 +40,11 @@ class ConsentServiceTest {
                 new ConsentRequest(ConsentType.SMS_NOTIFICATIONS.name(), true));
         UpdateConsentsRequest updateConsentsRequest = new UpdateConsentsRequest(new UserReference(userId), consentRequests);
 
-        when(userPersistencePort.findUserById(userId)).thenReturn(Optional.of(user));
+        when(userRepositoryPort.findUserById(userId)).thenReturn(Optional.of(user));
 
         consentService.changeConsent(updateConsentsRequest);
-        verify(consentPersistencePort, times(2)).save(any(Consent.class));
-        verify(consentChangeEventPersistencePort, times(2)).save(any(ConsentChangeEvent.class));
+        verify(consentRepositoryPort, times(2)).save(any(Consent.class));
+        verify(consentChangeEventRepositoryPort, times(2)).save(any(ConsentChangeEvent.class));
         verify(domainEventPublisher, times(2)).publish(any(ConsentChangedEvent.class));
     }
 
@@ -55,11 +55,11 @@ class ConsentServiceTest {
                 new ConsentRequest(ConsentType.EMAIL_NOTIFICATIONS.name(), true),
                 new ConsentRequest(ConsentType.SMS_NOTIFICATIONS.name(), true));
         UpdateConsentsRequest updateConsentsRequest = new UpdateConsentsRequest(new UserReference(userId), consentRequests);
-        when(userPersistencePort.findUserById(userId)).thenReturn(Optional.empty());
+        when(userRepositoryPort.findUserById(userId)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class, () -> consentService.changeConsent(updateConsentsRequest));
-        verify(consentPersistencePort, never()).save(any());
-        verify(consentChangeEventPersistencePort, never()).save(any());
+        verify(consentRepositoryPort, never()).save(any());
+        verify(consentChangeEventRepositoryPort, never()).save(any());
         verify(domainEventPublisher, never()).publish(any());
     }
 }

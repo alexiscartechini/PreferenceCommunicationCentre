@@ -1,7 +1,7 @@
 package com.volkswagen.preferencecenter.infrastructure.persistance.adapter;
 
 import com.volkswagen.preferencecenter.domain.model.Consent;
-import com.volkswagen.preferencecenter.domain.port.ConsentPersistencePort;
+import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
 import com.volkswagen.preferencecenter.infrastructure.persistance.repository.ConsentRepository;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class ConsentRepositoryAdapter implements ConsentPersistencePort {
+public class ConsentRepositoryAdapter implements ConsentRepositoryPort {
 
     private final ConsentRepository consentRepository;
 

@@ -1,7 +1,7 @@
 package com.volkswagen.preferencecenter.infrastructure.persistance.adapter;
 
 import com.volkswagen.preferencecenter.domain.model.User;
-import com.volkswagen.preferencecenter.domain.port.UserPersistencePort;
+import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
 import com.volkswagen.preferencecenter.infrastructure.persistance.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class UserRepositoryAdapter implements UserPersistencePort {
+public class UserRepositoryAdapter implements UserRepositoryPort {
 
     private final UserRepository userRepository;
 

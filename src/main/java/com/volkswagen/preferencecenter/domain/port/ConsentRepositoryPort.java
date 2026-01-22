@@ -5,7 +5,7 @@ import com.volkswagen.preferencecenter.domain.model.Consent;
 import java.util.List;
 import java.util.UUID;
 
-public interface ConsentPersistencePort {
+public interface ConsentRepositoryPort {
 
     List<Consent> getConsentsByUserId(UUID id);
 

@@ -4,8 +4,8 @@ import com.volkswagen.preferencecenter.application.exception.EmailAlreadyExistsE
 import com.volkswagen.preferencecenter.application.exception.UserNotFoundException;
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.User;
-import com.volkswagen.preferencecenter.domain.port.ConsentPersistencePort;
-import com.volkswagen.preferencecenter.domain.port.UserPersistencePort;
+import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
+import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
 import com.volkswagen.preferencecenter.dto.UserResponse;
 import org.springframework.stereotype.Service;
 
@@ -15,28 +15,28 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private final UserPersistencePort userPersistencePort;
-    private final ConsentPersistencePort consentPersistencePort;
+    private final UserRepositoryPort userRepositoryPort;
+    private final ConsentRepositoryPort consentRepositoryPort;
 
-    public UserService(UserPersistencePort userPersistencePort, ConsentPersistencePort consentPersistencePort) {
-        this.userPersistencePort = userPersistencePort;
-        this.consentPersistencePort = consentPersistencePort;
+    public UserService(UserRepositoryPort userRepositoryPort, ConsentRepositoryPort consentRepositoryPort) {
+        this.userRepositoryPort = userRepositoryPort;
+        this.consentRepositoryPort = consentRepositoryPort;
     }
 
     public boolean isUniqueEmail(String email) {
-        return userPersistencePort.findByEmail(email).isEmpty();
+        return userRepositoryPort.findByEmail(email).isEmpty();
     }
 
     public User createUser(String email) {
         if (!isUniqueEmail(email)) throw new EmailAlreadyExistsException(email + " already exists.");
         User user = new User(email);
-        userPersistencePort.save(user);
+        userRepositoryPort.save(user);
         return user;
     }
 
     public UserResponse getUserWithCurrentConsents(UUID id) {
-        User user = userPersistencePort.findUserById(id).orElseThrow(() -> new UserNotFoundException("User not found."));
-        List<Consent> consents = consentPersistencePort.getConsentsByUserId(id);
+        User user = userRepositoryPort.findUserById(id).orElseThrow(() -> new UserNotFoundException("User not found."));
+        List<Consent> consents = consentRepositoryPort.getConsentsByUserId(id);
         return UserResponse.from(user, consents);
     }
 }
