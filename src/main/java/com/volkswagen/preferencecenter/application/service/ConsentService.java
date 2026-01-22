@@ -29,10 +29,10 @@ public class ConsentService {
         this.consentChangedEventHandler = consentChangedEventHandler;
     }
 
-    private ConsentChangeEvent getConsentChangeEvent(ConsentRequest consentRequest, User user) {
+    private ConsentChangeEvent toConsentChangeEvent(ConsentRequest consentRequest, User user) {
         return new ConsentChangeEvent(
                 user.getId(),
-                ConsentType.from(consentRequest.id()),
+                ConsentType.from(consentRequest.consentType()),
                 consentRequest.enabled(),
                 Instant.now()
         );
@@ -45,14 +45,14 @@ public class ConsentService {
 
         updateConsentsRequest.consents().forEach(consentRequest -> {
                     updateConsent(consentRequest, user);
-                    consentChangedEventHandler.handle(getConsentChangeEvent(consentRequest, user));
+                    consentChangedEventHandler.handle(toConsentChangeEvent(consentRequest, user));
                 }
         );
     }
 
     private void updateConsent(ConsentRequest consentRequest, User user) {
         consentRepositoryPort.save(new Consent(
-                ConsentType.from(consentRequest.id()),
+                ConsentType.from(consentRequest.consentType()),
                 user.getId(),
                 consentRequest.enabled()
         ));

@@ -1,6 +1,6 @@
 package com.volkswagen.preferencecenter.application.event;
 
-import com.volkswagen.preferencecenter.domain.event.ConsentChangedEvent;
+import com.volkswagen.preferencecenter.domain.event.ConsentChangeOccurred;
 import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 import com.volkswagen.preferencecenter.domain.port.ConsentChangeEventRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.DomainEventPublisher;
@@ -22,6 +22,6 @@ public class ConsentChangedEventHandler {
 
     public void handle(ConsentChangeEvent event) {
         consentChangeEventRepositoryPort.save(event);
-        domainEventPublisher.publish(ConsentChangedEvent.from(event));
+        domainEventPublisher.publish(ConsentChangeOccurred.from(event));
     }
 }

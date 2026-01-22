@@ -1,7 +1,7 @@
 package com.volkswagen.preferencecenter.domain.port;
 
-import com.volkswagen.preferencecenter.domain.event.ConsentChangedEvent;
+import com.volkswagen.preferencecenter.domain.event.ConsentChangeOccurred;
 
 public interface DomainEventPublisher {
-    void publish(ConsentChangedEvent consentChangedEvent);
+    void publish(ConsentChangeOccurred consentChangeOccurred);
 }
