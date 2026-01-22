@@ -1,14 +1,12 @@
 package com.volkswagen.preferencecenter.application.service;
 
+import com.volkswagen.preferencecenter.application.event.ConsentChangedEventHandler;
 import com.volkswagen.preferencecenter.application.exception.UserNotFoundException;
-import com.volkswagen.preferencecenter.domain.event.ConsentChangedEvent;
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 import com.volkswagen.preferencecenter.domain.model.ConsentType;
 import com.volkswagen.preferencecenter.domain.model.User;
-import com.volkswagen.preferencecenter.domain.port.ConsentChangeEventRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
-import com.volkswagen.preferencecenter.domain.port.DomainEventPublisher;
 import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
 import com.volkswagen.preferencecenter.dto.ConsentRequest;
 import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
@@ -21,18 +19,14 @@ import java.time.Instant;
 public class ConsentService {
 
     private final UserRepositoryPort userRepositoryPort;
-    private final ConsentChangeEventRepositoryPort consentChangeEventRepositoryPort;
     private final ConsentRepositoryPort consentRepositoryPort;
-    private final DomainEventPublisher domainEventPublisher;
+    private final ConsentChangedEventHandler consentChangedEventHandler;
 
     public ConsentService(UserRepositoryPort userRepositoryPort,
-                          ConsentChangeEventRepositoryPort consentChangeEventRepositoryPort,
-                          ConsentRepositoryPort consentRepositoryPort,
-                          DomainEventPublisher domainEventPublisher) {
+                          ConsentRepositoryPort consentRepositoryPort, ConsentChangedEventHandler consentChangedEventHandler) {
         this.userRepositoryPort = userRepositoryPort;
-        this.consentChangeEventRepositoryPort = consentChangeEventRepositoryPort;
         this.consentRepositoryPort = consentRepositoryPort;
-        this.domainEventPublisher = domainEventPublisher;
+        this.consentChangedEventHandler = consentChangedEventHandler;
     }
 
     private static ConsentChangeEvent getConsentChangeEvent(ConsentRequest consentRequest, User user) {
@@ -51,9 +45,7 @@ public class ConsentService {
 
         updateConsentsRequest.consents().forEach(consentRequest -> {
                     updateConsent(consentRequest, user);
-                    ConsentChangeEvent consentChangeEvent = getConsentChangeEvent(consentRequest, user);
-                    consentChangeEventRepositoryPort.save(consentChangeEvent);
-                    domainEventPublisher.publish(ConsentChangedEvent.from(consentChangeEvent));
+                    consentChangedEventHandler.handle(getConsentChangeEvent(consentRequest, user));
                 }
         );
     }

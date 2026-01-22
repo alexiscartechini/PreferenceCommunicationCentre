@@ -1,14 +1,12 @@
 package com.volkswagen.preferencecenter.application.service;
 
+import com.volkswagen.preferencecenter.application.event.ConsentChangedEventHandler;
 import com.volkswagen.preferencecenter.application.exception.UserNotFoundException;
-import com.volkswagen.preferencecenter.domain.event.ConsentChangedEvent;
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 import com.volkswagen.preferencecenter.domain.model.ConsentType;
 import com.volkswagen.preferencecenter.domain.model.User;
-import com.volkswagen.preferencecenter.domain.port.ConsentChangeEventRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
-import com.volkswagen.preferencecenter.domain.port.DomainEventPublisher;
 import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
 import com.volkswagen.preferencecenter.dto.ConsentRequest;
 import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
@@ -25,11 +23,10 @@ import static org.mockito.Mockito.*;
 class ConsentServiceTest {
 
     private final UserRepositoryPort userRepositoryPort = mock(UserRepositoryPort.class);
-    private final ConsentChangeEventRepositoryPort consentChangeEventRepositoryPort = mock(ConsentChangeEventRepositoryPort.class);
     private final ConsentRepositoryPort consentRepositoryPort = mock(ConsentRepositoryPort.class);
-    private final DomainEventPublisher domainEventPublisher = mock(DomainEventPublisher.class);
+    private final ConsentChangedEventHandler consentChangedEventHandler = mock(ConsentChangedEventHandler.class);
 
-    private final ConsentService consentService = new ConsentService(userRepositoryPort, consentChangeEventRepositoryPort, consentRepositoryPort, domainEventPublisher);
+    private final ConsentService consentService = new ConsentService(userRepositoryPort, consentRepositoryPort, consentChangedEventHandler);
 
     @Test
     void shouldUpdateConsentForAGivenUser() {
@@ -44,8 +41,7 @@ class ConsentServiceTest {
 
         consentService.changeConsent(updateConsentsRequest);
         verify(consentRepositoryPort, times(2)).save(any(Consent.class));
-        verify(consentChangeEventRepositoryPort, times(2)).save(any(ConsentChangeEvent.class));
-        verify(domainEventPublisher, times(2)).publish(any(ConsentChangedEvent.class));
+        verify(consentChangedEventHandler, times(2)).handle(any(ConsentChangeEvent.class));
     }
 
     @Test
@@ -59,7 +55,6 @@ class ConsentServiceTest {
 
         assertThrows(UserNotFoundException.class, () -> consentService.changeConsent(updateConsentsRequest));
         verify(consentRepositoryPort, never()).save(any());
-        verify(consentChangeEventRepositoryPort, never()).save(any());
-        verify(domainEventPublisher, never()).publish(any());
+        verify(consentChangedEventHandler, never()).handle(any());
     }
 }
