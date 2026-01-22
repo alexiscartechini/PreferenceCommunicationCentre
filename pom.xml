@@ -93,6 +93,11 @@
 						<configuration>
 							<excludes>
 								<exclude>**/PreferenceCenterApplication.class</exclude>
+								<exclude>**/LoggingDomainEventPublisher.class</exclude>
+								<exclude>**/ApiExceptionHandler.class</exclude>
+								<exclude>**/ConsentChangeEventRepositoryAdapter.class</exclude>
+								<exclude>**/ConsentRepositoryAdapter.class</exclude>
+								<exclude>**/UserRepositoryAdapter.class</exclude>
 							</excludes>
 						</configuration>
 					</execution>
@@ -106,6 +111,11 @@
 						<configuration>
 							<excludes>
 								<exclude>**/PreferenceCenterApplication.class</exclude>
+								<exclude>**/LoggingDomainEventPublisher.class</exclude>
+								<exclude>**/ApiExceptionHandler.class</exclude>
+								<exclude>**/ConsentChangeEventRepositoryAdapter.class</exclude>
+								<exclude>**/ConsentRepositoryAdapter.class</exclude>
+								<exclude>**/UserRepositoryAdapter.class</exclude>
 							</excludes>
 							<rules>
 								<rule>
