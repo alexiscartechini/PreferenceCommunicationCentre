@@ -6,7 +6,7 @@ import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
-import com.volkswagen.preferencecenter.dto.UserResponse;
+import com.volkswagen.preferencecenter.dto.response.UserResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

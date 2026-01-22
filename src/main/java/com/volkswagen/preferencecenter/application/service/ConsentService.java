@@ -8,8 +8,8 @@ import com.volkswagen.preferencecenter.domain.model.ConsentType;
 import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
-import com.volkswagen.preferencecenter.dto.ConsentRequest;
-import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
+import com.volkswagen.preferencecenter.dto.request.ConsentRequest;
+import com.volkswagen.preferencecenter.dto.request.UpdateConsentsRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

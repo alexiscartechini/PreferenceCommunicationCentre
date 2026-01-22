@@ -2,9 +2,9 @@ package com.volkswagen.preferencecenter.infrastructure.controller;
 
 import com.volkswagen.preferencecenter.application.service.UserService;
 import com.volkswagen.preferencecenter.domain.model.User;
-import com.volkswagen.preferencecenter.dto.CreateUserRequest;
-import com.volkswagen.preferencecenter.dto.UpdateUserEmailRequest;
-import com.volkswagen.preferencecenter.dto.UserResponse;
+import com.volkswagen.preferencecenter.dto.request.CreateUserRequest;
+import com.volkswagen.preferencecenter.dto.request.UpdateUserEmailRequest;
+import com.volkswagen.preferencecenter.dto.response.UserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
 package com.volkswagen.preferencecenter.infrastructure.controller;
 
 import com.volkswagen.preferencecenter.application.service.ConsentService;
-import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
-import com.volkswagen.preferencecenter.dto.UserReference;
+import com.volkswagen.preferencecenter.dto.request.UpdateConsentsRequest;
+import com.volkswagen.preferencecenter.dto.request.UserReference;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

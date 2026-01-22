@@ -8,9 +8,9 @@ import com.volkswagen.preferencecenter.domain.model.ConsentType;
 import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.domain.port.ConsentRepositoryPort;
 import com.volkswagen.preferencecenter.domain.port.UserRepositoryPort;
-import com.volkswagen.preferencecenter.dto.ConsentRequest;
-import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
-import com.volkswagen.preferencecenter.dto.UserReference;
+import com.volkswagen.preferencecenter.dto.request.ConsentRequest;
+import com.volkswagen.preferencecenter.dto.request.UpdateConsentsRequest;
+import com.volkswagen.preferencecenter.dto.request.UserReference;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

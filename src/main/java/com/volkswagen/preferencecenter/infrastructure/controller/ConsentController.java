@@ -1,7 +1,7 @@
 package com.volkswagen.preferencecenter.infrastructure.controller;
 
 import com.volkswagen.preferencecenter.application.service.ConsentService;
-import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
+import com.volkswagen.preferencecenter.dto.request.UpdateConsentsRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

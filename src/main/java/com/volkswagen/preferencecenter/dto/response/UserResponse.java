@@ -1,4 +1,4 @@
-package com.volkswagen.preferencecenter.dto;
+package com.volkswagen.preferencecenter.dto.response;
 
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.User;

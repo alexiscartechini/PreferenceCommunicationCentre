@@ -1,4 +1,4 @@
-package com.volkswagen.preferencecenter.dto;
+package com.volkswagen.preferencecenter.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
