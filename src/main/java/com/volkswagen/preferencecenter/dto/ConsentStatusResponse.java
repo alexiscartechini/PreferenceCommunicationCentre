@@ -4,7 +4,7 @@ import com.volkswagen.preferencecenter.domain.model.Consent;
 
 import java.util.List;
 
-public record ConsentStatusResponse(String id, boolean isEnabled){
+public record ConsentStatusResponse(String id, boolean isEnabled) {
 
     public static List<ConsentStatusResponse> from(List<Consent> consents) {
         return consents.stream()

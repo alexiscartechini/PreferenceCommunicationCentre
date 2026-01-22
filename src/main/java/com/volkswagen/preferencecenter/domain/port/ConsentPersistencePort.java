@@ -8,5 +8,6 @@ import java.util.UUID;
 public interface ConsentPersistencePort {
 
     List<Consent> getConsentsByUserId(UUID id);
+
     void save(Consent consent);
 }

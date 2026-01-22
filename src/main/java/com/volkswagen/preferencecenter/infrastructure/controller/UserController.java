@@ -21,14 +21,14 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest userRequest){
+    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest userRequest) {
         User user = userService.createUser(userRequest.email());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(UserResponse.from(user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable UUID id){
+    public ResponseEntity<UserResponse> getUser(@PathVariable UUID id) {
         return ResponseEntity.ok(userService.getUserWithCurrentConsents(id));
     }
 }

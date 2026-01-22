@@ -22,7 +22,7 @@ class UserControllerTest {
     UserController userController = new UserController(userService);
 
     @Test
-    void shouldCreateUser(){
+    void shouldCreateUser() {
         CreateUserRequest createUserRequest = new CreateUserRequest(VALID_EMAIL);
         User user = new User(VALID_EMAIL);
 
@@ -38,7 +38,7 @@ class UserControllerTest {
     }
 
     @Test
-    void shouldGetUserById(){
+    void shouldGetUserById() {
         UUID userId = UUID.randomUUID();
         UserResponse userResponse = new UserResponse(userId, VALID_EMAIL, List.of());
         when(userService.getUserWithCurrentConsents(userId)).thenReturn(userResponse);

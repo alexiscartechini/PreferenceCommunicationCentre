@@ -32,7 +32,7 @@ class ConsentServiceTest {
     private final ConsentService consentService = new ConsentService(userPersistencePort, consentChangeEventPersistencePort, consentPersistencePort, domainEventPublisher);
 
     @Test
-    void shouldUpdateConsentForAGivenUser(){
+    void shouldUpdateConsentForAGivenUser() {
         UUID userId = UUID.randomUUID();
         User user = new User("valid_email@email.com");
         List<ConsentRequest> consentRequests = List.of(
@@ -49,7 +49,7 @@ class ConsentServiceTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenUserNotFound(){
+    void shouldThrowExceptionWhenUserNotFound() {
         UUID userId = UUID.randomUUID();
         List<ConsentRequest> consentRequests = List.of(
                 new ConsentRequest(ConsentType.EMAIL_NOTIFICATIONS.name(), true),

@@ -14,14 +14,14 @@ public class ApiExceptionHandler {
             EmailAlreadyExistsException.class,
             InvalidEmailException.class
     })
-    public ResponseEntity<String> handleUnprocessableEntity(RuntimeException exception){
+    public ResponseEntity<String> handleUnprocessableEntity(RuntimeException exception) {
         return ResponseEntity
                 .status(422)
                 .body(exception.getMessage());
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> handleUnexistingUser(RuntimeException exception){
+    public ResponseEntity<String> handleUnexistingUser(RuntimeException exception) {
         return ResponseEntity
                 .status(404)
                 .body(exception.getMessage());

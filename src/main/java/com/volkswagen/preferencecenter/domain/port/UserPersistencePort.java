@@ -8,6 +8,8 @@ import java.util.UUID;
 public interface UserPersistencePort {
 
     Optional<User> findByEmail(String email);
+
     void save(User user);
+
     Optional<User> findUserById(UUID id);
 }

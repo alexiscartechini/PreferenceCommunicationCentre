@@ -26,7 +26,7 @@ class UserServiceTest {
     private final UserService userService = new UserService(userPersistencePort, consentPersistencePort);
 
     @Test
-    void shouldThrowExceptionWhenEmailAlreadyExists(){
+    void shouldThrowExceptionWhenEmailAlreadyExists() {
         when(userPersistencePort.findByEmail(NOT_UNIQUE_EMAIL)).thenReturn(Optional.of(new User(NOT_UNIQUE_EMAIL)));
 
         assertFalse(userService.isUniqueEmail(NOT_UNIQUE_EMAIL));
@@ -35,7 +35,7 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldCreateUser(){
+    void shouldCreateUser() {
         when(userPersistencePort.findByEmail(UNIQUE_EMAIL)).thenReturn(Optional.empty());
 
         User result = userService.createUser(UNIQUE_EMAIL);
@@ -46,7 +46,7 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldReturnUserWithConsents(){
+    void shouldReturnUserWithConsents() {
         UUID userId = UUID.randomUUID();
         User user = new User(UNIQUE_EMAIL);
 
@@ -66,7 +66,7 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenUserNotFound(){
+    void shouldThrowExceptionWhenUserNotFound() {
         UUID userId = UUID.randomUUID();
 
         when(userPersistencePort.findUserById(userId)).thenReturn(Optional.empty());

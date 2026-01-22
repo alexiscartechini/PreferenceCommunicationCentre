@@ -2,13 +2,13 @@ package com.volkswagen.preferencecenter.application.service;
 
 import com.volkswagen.preferencecenter.application.exception.UserNotFoundException;
 import com.volkswagen.preferencecenter.domain.event.ConsentChangedEvent;
-import com.volkswagen.preferencecenter.domain.port.DomainEventPublisher;
 import com.volkswagen.preferencecenter.domain.model.Consent;
 import com.volkswagen.preferencecenter.domain.model.ConsentChangeEvent;
 import com.volkswagen.preferencecenter.domain.model.ConsentType;
 import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.domain.port.ConsentChangeEventPersistencePort;
 import com.volkswagen.preferencecenter.domain.port.ConsentPersistencePort;
+import com.volkswagen.preferencecenter.domain.port.DomainEventPublisher;
 import com.volkswagen.preferencecenter.domain.port.UserPersistencePort;
 import com.volkswagen.preferencecenter.dto.ConsentRequest;
 import com.volkswagen.preferencecenter.dto.UpdateConsentsRequest;
@@ -34,16 +34,25 @@ public class ConsentService {
         this.domainEventPublisher = domainEventPublisher;
     }
 
+    private static ConsentChangeEvent getConsentChangeEvent(ConsentRequest consentRequest, User user) {
+        return new ConsentChangeEvent(
+                user.getId(),
+                ConsentType.from(consentRequest.id()),
+                consentRequest.enabled(),
+                Instant.now()
+        );
+    }
+
     public void changeConsent(UpdateConsentsRequest updateConsentsRequest) {
         User user = userPersistencePort.findUserById(updateConsentsRequest.user().id())
                 .orElseThrow(() -> new UserNotFoundException("User not found."));
 
         updateConsentsRequest.consents().forEach(consentRequest -> {
-            updateConsent(consentRequest, user);
-            ConsentChangeEvent consentChangeEvent = getConsentChangeEvent(consentRequest, user);
-            consentChangeEventPersistencePort.save(consentChangeEvent);
-            domainEventPublisher.publish(ConsentChangedEvent.from(consentChangeEvent));
-            }
+                    updateConsent(consentRequest, user);
+                    ConsentChangeEvent consentChangeEvent = getConsentChangeEvent(consentRequest, user);
+                    consentChangeEventPersistencePort.save(consentChangeEvent);
+                    domainEventPublisher.publish(ConsentChangedEvent.from(consentChangeEvent));
+                }
         );
     }
 
@@ -53,14 +62,5 @@ public class ConsentService {
                 user.getId(),
                 consentRequest.enabled()
         ));
-    }
-
-    private static ConsentChangeEvent getConsentChangeEvent(ConsentRequest consentRequest, User user) {
-        return new ConsentChangeEvent(
-                user.getId(),
-                ConsentType.from(consentRequest.id()),
-                consentRequest.enabled(),
-                Instant.now()
-        );
     }
 }
