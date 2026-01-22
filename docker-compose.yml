@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: preference-postgres
+    environment:
+      POSTGRES_DB: preference_center
+      POSTGRES_USER: preference_user
+      POSTGRES_PASSWORD: preference_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: preference-center-app
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/preference_center
+      DB_USERNAME: preference_user
+      DB_PASSWORD: preference_password
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
