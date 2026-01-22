@@ -10,7 +10,7 @@ public record ConsentStatusResponse(String id, boolean isEnabled) {
         return consents.stream()
                 .map(consent ->
                         new ConsentStatusResponse(
-                                consent.getId().name(),
+                                consent.getConsentType().name(),
                                 consent.isEnabled()
                         )
                 )

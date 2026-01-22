@@ -11,8 +11,10 @@ import java.util.UUID;
 public class Consent {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Enumerated(EnumType.STRING)
-    private ConsentType id;
+    private ConsentType consentType;
     private UUID userId;
     private boolean isEnabled;
 
@@ -20,8 +22,8 @@ public class Consent {
         //needed for JPA
     }
 
-    public Consent(ConsentType id, UUID userId, boolean isEnabled) {
-        this.id = id;
+    public Consent(ConsentType consentType, UUID userId, boolean isEnabled) {
+        this.consentType = consentType;
         this.userId = userId;
         this.isEnabled = isEnabled;
     }
