@@ -73,4 +73,41 @@ class UserServiceTest {
 
         assertThrows(UserNotFoundException.class, () -> userService.getUserWithCurrentConsents(userId));
     }
+
+    @Test
+    void shouldUpdateEmail() {
+        UUID userId = UUID.randomUUID();
+        User user = new User(UNIQUE_EMAIL);
+
+        when(userRepositoryPort.findUserById(userId)).thenReturn(Optional.of(user));
+
+        String newEmail = "new_email@email.com";
+        userService.updateEmail(userId, newEmail);
+
+        assertEquals(newEmail, user.getEmail());
+        verify(userRepositoryPort).findUserById(userId);
+    }
+
+    @Test
+    void shouldDeleteUser() {
+        UUID userId = UUID.randomUUID();
+
+        userService.deleteUser(userId);
+
+        verify(userRepositoryPort).deleteById(userId);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenUpdatingEmailAndUserNotFound() {
+        UUID userId = UUID.randomUUID();
+
+        when(userRepositoryPort.findUserById(userId)).thenReturn(Optional.empty());
+
+        assertThrows(
+                UserNotFoundException.class,
+                () -> userService.updateEmail(userId, "new@email.com")
+        );
+
+        verify(userRepositoryPort).findUserById(userId);
+    }
 }

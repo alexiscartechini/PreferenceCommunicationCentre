@@ -3,6 +3,7 @@ package com.volkswagen.preferencecenter.infrastructure.controller;
 import com.volkswagen.preferencecenter.application.service.UserService;
 import com.volkswagen.preferencecenter.domain.model.User;
 import com.volkswagen.preferencecenter.dto.request.CreateUserRequest;
+import com.volkswagen.preferencecenter.dto.request.UpdateUserEmailRequest;
 import com.volkswagen.preferencecenter.dto.response.UserResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -48,5 +49,25 @@ class UserControllerTest {
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(userResponse, result.getBody());
         verify(userService).getUserWithCurrentConsents(userId);
+    }
+
+    @Test
+    void shouldDeleteUser() {
+        UUID userId = UUID.randomUUID();
+
+        userController.deleteUser(userId);
+
+        verify(userService).deleteUser(userId);
+    }
+
+    @Test
+    void shouldUpdateUserEmail() {
+        UUID userId = UUID.randomUUID();
+        String newEmail = "new_email@email.com";
+        UpdateUserEmailRequest request = new UpdateUserEmailRequest(newEmail);
+
+        userController.updateEmail(userId, request);
+
+        verify(userService).updateEmail(userId, newEmail);
     }
 }

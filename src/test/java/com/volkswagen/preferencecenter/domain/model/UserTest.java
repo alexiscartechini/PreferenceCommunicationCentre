@@ -24,7 +24,13 @@ class UserTest {
             "invalid_email@emailcom",
             "invalid_email.com@email"
     })
-    void shouldReturnFalseIfEmailIsInvalid(String invalidEmail) {
+    void shouldReturnExceptionWhenCreatingUserWithEmailIsInvalid(String invalidEmail) {
         assertThrows(InvalidEmailException.class, () -> new User(invalidEmail));
+    }
+
+    @Test
+    void shouldReturnExceptionWhenUpdatingUserEmailWithEmailIsInvalid() {
+        User user = new User(VALID_EMAIL);
+        assertThrows(InvalidEmailException.class, () ->  user.changeEmail("invalid_email.com@email"));
     }
 }
