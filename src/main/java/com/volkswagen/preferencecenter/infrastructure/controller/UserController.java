@@ -41,7 +41,7 @@ public class UserController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateEmail(@PathVariable UUID id, @RequestBody UpdateUserEmailRequest updateUserEmailRequest){
+    public void updateEmail(@PathVariable UUID id, @RequestBody UpdateUserEmailRequest updateUserEmailRequest) {
         userService.updateEmail(id, updateUserEmailRequest.email());
     }
 }

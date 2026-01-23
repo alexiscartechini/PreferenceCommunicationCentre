@@ -31,6 +31,6 @@ class UserTest {
     @Test
     void shouldReturnExceptionWhenUpdatingUserEmailWithEmailIsInvalid() {
         User user = new User(VALID_EMAIL);
-        assertThrows(InvalidEmailException.class, () ->  user.changeEmail("invalid_email.com@email"));
+        assertThrows(InvalidEmailException.class, () -> user.changeEmail("invalid_email.com@email"));
     }
 }
