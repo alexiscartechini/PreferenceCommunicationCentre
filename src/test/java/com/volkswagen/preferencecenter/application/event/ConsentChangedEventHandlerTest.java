@@ -40,4 +40,3 @@ class ConsentChangedEventHandlerTest {
         verify(publisher).publish(any(ConsentChangeOccurred.class));
     }
 }
-

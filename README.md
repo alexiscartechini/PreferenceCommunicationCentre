@@ -142,5 +142,3 @@ The collection includes requests for:
 ### Consents
 
 * `PUT /api/consents` – Update user consents
-
----
