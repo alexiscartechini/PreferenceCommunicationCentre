@@ -8,7 +8,7 @@
         <version>4.0.1</version>
         <relativePath/>
     </parent>
-    <groupId>com.volkswagen.preferencecenter</groupId>
+    <groupId>com.preferencecenter</groupId>
     <artifactId>preferenceCenter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>preferenceCenter</name>
